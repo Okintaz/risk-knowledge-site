@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Risk Management Tools | RiskDecoded</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #e60012;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --muted: #475569;
+
+      --low: #22c55e;
+      --medium: #facc15;
+      --high: #f97316;
+      --extreme: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 64px auto;
+      padding: 0 24px;
+    }
+
+    h2 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    h3 {
+      font-size: 26px;
+      margin-top: 64px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: var(--muted);
+      max-width: 900px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 24px;
+      overflow-x: auto;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 600;
+    }
+
+    /* Risk Matrix */
+    .matrix {
+      display: grid;
+      grid-template-columns: 80px repeat(5, 1fr);
+      margin-top: 24px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .matrix div {
+      padding: 16px;
+      border: 1px solid var(--border);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .label {
+      background: #f1f5f9;
+      font-weight: 600;
+    }
+
+    .low { background: var(--low); color: #ffffff; }
+    .medium { background: var(--medium); }
+    .high { background: var(--high); color: #ffffff; }
+    .extreme { background: var(--extreme); color: #ffffff; }
+
+    footer {
+      margin-top: 96px;
+      padding: 32px;
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>RiskDecoded.org</h1>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <section>
+    <h2>Risk Management Tools</h2>
+    <p>
+      Risk management tools help organizations translate abstract uncertainty
+      into structured, actionable insights. These tools support identification,
+      assessment, monitoring, and decision-making across different risk types.
+    </p>
+  </section>
+
+  <!-- RISK REGISTER -->
+  <section>
+    <h3>1. Risk Register</h3>
+    <p>
+      A risk register is the core repository of identified risks.
+      It documents key information including causes, impacts, ownership,
+      and mitigation actions.
+    </p>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Risk Category</th>
+            <th>Risk Description</th>
+            <th>Cause</th>
+            <th>Impact</th>
+            <th>Likelihood (1–5)</th>
+            <th>Impact (1–5)</th>
+            <th>Risk Rating</th>
+            <th>Mitigation Strategy</th>
+            <th>Risk Owner</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Financial</td>
+            <td>Decline in investment portfolio value</td>
+            <td>Market volatility</td>
+            <td>Lower IRR and impairment loss</td>
+            <td>4</td>
+            <td>4</td>
+            <td>16</td>
+            <td>Diversification, periodic valuation review</td>
+            <td>Investment Committee</td>
+            <td>Ongoing</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Operational</td>
+            <td>Delayed risk reporting</td>
+            <td>Lack of awareness</td>
+            <td>Incomplete governance oversight</td>
+            <td>3</td>
+            <td>3</td>
+            <td>9</td>
+            <td>Training, reporting automation</td>
+            <td>Risk Control Unit</td>
+            <td>Mitigated</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- RISK MATRIX -->
+  <section>
+    <h3>2. Risk Matrix</h3>
+    <p>
+      A risk matrix visualizes risk exposure by combining likelihood and impact.
+      It helps prioritize risks and determine appropriate treatment actions.
+    </p>
+
+    <div class="card">
+      <div class="matrix">
+        <div class="label">Impact ↓ / Likelihood →</div>
+        <div class="label">1</div>
+        <div class="label">2</div>
+        <div class="label">3</div>
+        <div class="label">4</div>
+        <div class="label">5</div>
+
+        <div class="label">5</div>
+        <div class="medium">M</div>
+        <div class="high">H</div>
+        <div class="high">H</div>
+        <div class="extreme">E</div>
+        <div class="extreme">E</div>
+
+        <div class="label">4</div>
+        <div class="medium">M</div>
+        <div class="medium">M</div>
+        <div class="high">H</div>
+        <div class="high">H</div>
+        <div class="extreme">E</div>
+
+        <div class="label">3</div>
+        <div class="low">L</div>
+        <div class="medium">M</div>
+        <div class="medium">M</div>
+        <div class="high">H</div>
+        <div class="high">H</div>
+
+        <div class="label">2</div>
+        <div class="low">L</div>
+        <div class="low">L</div>
+        <div class="medium">M</div>
+        <div class="medium">M</div>
+        <div class="high">H</div>
+
+        <div class="label">1</div>
+        <div class="low">L</div>
+        <div class="low">L</div>
+        <div class="low">L</div>
+        <div class="medium">M</div>
+        <div class="medium">M</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KRI -->
+  <section>
+    <h3>3. Key Risk Indicators (KRI)</h3>
+    <p>
+      KRIs are measurable metrics used to provide early warning signals
+      of increasing risk exposure.
+    </p>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Risk Area</th>
+            <th>KRI</th>
+            <th>Threshold</th>
+            <th>Current Value</th>
+            <th>Status</th>
+            <th>Action Triggered</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Financial Risk</td>
+            <td>Portfolio value decline (%)</td>
+            <td>> 15%</td>
+            <td>12%</td>
+            <td>Normal</td>
+            <td>Monitor</td>
+          </tr>
+          <tr>
+            <td>Operational Risk</td>
+            <td>Late risk reports</td>
+            <td>> 3 divisions</td>
+            <td>4 divisions</td>
+            <td>Warning</td>
+            <td>Escalation to management</td>
+          </tr>
+          <tr>
+            <td>Compliance Risk</td>
+            <td>Unresolved audit findings</td>
+            <td>> 5 issues</td>
+            <td>6 issues</td>
+            <td>Critical</td>
+            <td>Immediate remediation</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 RiskDecoded.org — Practical Risk Management Education
+</footer>
+
+</body>
+</html>
