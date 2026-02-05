@@ -29,10 +29,9 @@
       font-family: "Inter", sans-serif;
       background: var(--bg);
       color: var(--primary);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    /* Header */
     header {
       background: #ffffff;
       border-bottom: 1px solid var(--border);
@@ -45,13 +44,13 @@
       font-weight: 600;
     }
 
-    /* Hero */
-    .hero {
+    main {
       max-width: 1100px;
-      margin: 72px auto 48px;
+      margin: 64px auto;
       padding: 0 24px;
     }
 
+    /* Hero */
     .hero h2 {
       font-size: 44px;
       line-height: 1.2;
@@ -64,14 +63,12 @@
       color: var(--muted);
     }
 
-    /* Navigation Grid */
+    /* Navigation cards */
     .nav-grid {
-      max-width: 1100px;
-      margin: 56px auto;
-      padding: 0 24px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 32px;
+      margin: 64px 0;
     }
 
     .nav-card {
@@ -82,7 +79,6 @@
       text-decoration: none;
       color: inherit;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      position: relative;
     }
 
     .nav-card:hover {
@@ -92,11 +88,11 @@
     }
 
     .nav-card span {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
 
     .nav-card h3 {
@@ -109,13 +105,67 @@
       color: var(--muted);
     }
 
-    /* Footer */
+    /* AI Agent Section */
+    .ai-agent {
+      margin: 96px 0;
+      padding: 72px 24px;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #ffffff;
+      border-radius: 28px;
+    }
+
+    .ai-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .ai-text h2 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .ai-text p {
+      font-size: 16px;
+      color: #e5e7eb;
+      margin-bottom: 12px;
+    }
+
+    .ai-note {
+      margin-top: 16px;
+      font-size: 14px;
+      color: #cbd5f5;
+      font-style: italic;
+    }
+
+    .ai-widget {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px;
+      min-height: 520px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
     footer {
       margin-top: 96px;
       padding: 32px;
       text-align: center;
       font-size: 14px;
       color: #64748b;
+    }
+
+    /* Mobile */
+    @media (max-width: 900px) {
+      .ai-container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 {
+        font-size: 36px;
+      }
     }
   </style>
 </head>
@@ -132,9 +182,9 @@
   <section class="hero">
     <h2>Risk Management, Decoded.</h2>
     <p>
-      A public knowledge platform explaining risk management concepts,
-      frameworks, tools, and real-world practices — supported by an
-      AI-powered Risk Agent to help you learn and apply risk thinking.
+      A public knowledge platform that explains risk management concepts,
+      frameworks, tools, and real-world practices — designed to help you
+      think clearly and make better decisions under uncertainty.
     </p>
   </section>
 
@@ -145,8 +195,8 @@
       <span>Foundation</span>
       <h3>What Is Risk Management?</h3>
       <p>
-        Learn the fundamentals of risk, uncertainty, opportunity,
-        and threats based on global standards and best practices.
+        Understand uncertainty, opportunity, and threat — and how
+        risk management supports better decisions.
       </p>
     </a>
 
@@ -154,8 +204,8 @@
       <span>Framework</span>
       <h3>Risk Management — ISO 31000</h3>
       <p>
-        Understand the ISO 31000 principles, framework, and process
-        explained in a practical and visual way.
+        Learn the principles, framework, and process behind the
+        global risk management standard.
       </p>
     </a>
 
@@ -164,7 +214,7 @@
       <h3>Risk Management Tools</h3>
       <p>
         Explore risk registers, risk matrices, and key risk indicators
-        with practical templates and examples.
+        with practical examples.
       </p>
     </a>
 
@@ -172,18 +222,74 @@
       <span>Practice</span>
       <h3>Global Risk Management Cases</h3>
       <p>
-        See how organizations around the world apply risk management
-        across finance, operations, technology, and governance.
+        See how organizations worldwide apply risk management
+        across industries and sectors.
       </p>
     </a>
 
   </section>
 
+  <!-- AI AGENT -->
+  <section class="ai-agent">
+    <div class="ai-container">
+      <div class="ai-text">
+        <h2>Ask the AI Risk Agent</h2>
+        <p>
+          Have questions about risk management concepts, ISO 31000,
+          risk registers, matrices, or real-world applications?
+        </p>
+        <p>
+          The AI Risk Agent is designed to help explain concepts,
+          clarify terminology, and support learning using
+          established risk management knowledge.
+        </p>
+        <p class="ai-note">
+          Try asking: “Explain ISO 31000 in simple terms” or
+          “How do I design a risk register?”
+        </p>
+      </div>
+
+      <div class="ai-widget">
+        <!-- Chatbase widget renders here -->
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
-  © 2026 RiskDecoded.org — Public Risk Management Knowledge Hub
+  © 2026 RiskDecoded.org — Public Risk Management Knowledge Platform
 </footer>
+
+<!-- Chatbase AI Agent -->
+<script>
+(function(){
+  if(!window.chatbase || window.chatbase("getState") !== "initialized") {
+    window.chatbase = (...arguments) => {
+      if(!window.chatbase.q){ window.chatbase.q = [] }
+      window.chatbase.q.push(arguments)
+    };
+    window.chatbase = new Proxy(window.chatbase, {
+      get(target, prop) {
+        if(prop === "q") { return target.q }
+        return (...args) => target(prop, ...args)
+      }
+    })
+  }
+  const onLoad = function() {
+    const script = document.createElement("script");
+    script.src = "https://www.chatbase.co/embed.min.js";
+    script.id = "m9AEqzv4poxu_8_m0NV6H";
+    script.domain = "www.chatbase.co";
+    document.body.appendChild(script);
+  };
+  if(document.readyState === "complete") {
+    onLoad();
+  } else {
+    window.addEventListener("load", onLoad);
+  }
+})();
+</script>
 
 </body>
 </html>
