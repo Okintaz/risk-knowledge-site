@@ -2,321 +2,343 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RiskDecoded — Risk Management Knowledge Hub</title>
+  <title>Risk Decoded — Risk Management Knowledge Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #0f172a;
-      --accent: #e60012;
-      --bg: #f8fafc;
+      --dark: #0f172a;
+      --blue: #2563eb;
+      --light: #f8fafc;
+      --muted: #64748b;
       --card: #ffffff;
-      --border: #e5e7eb;
-      --muted: #475569;
+      --accent: #38bdf8;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: "Inter", sans-serif;
-      background: var(--bg);
-      color: var(--primary);
-      line-height: 1.7;
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
     }
 
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== HEADER ===== */
     header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      padding: 20px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e5e7eb;
     }
 
-    header h1 {
-      margin: 0;
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
       font-size: 20px;
-      font-weight: 600;
+      color: var(--blue);
     }
 
-    main {
-      max-width: 1100px;
-      margin: 64px auto;
-      padding: 0 24px;
+    .menu {
+      display: flex;
+      gap: 24px;
+      font-weight: 500;
     }
 
-    /* HERO */
-    .hero h2 {
-      font-size: 44px;
+    .menu a:hover {
+      color: var(--blue);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(120deg, #0f172a, #1e3a8a);
+      color: white;
+      padding: 100px 24px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 48px;
       line-height: 1.2;
-      margin-bottom: 16px;
+      margin-bottom: 24px;
     }
 
     .hero p {
+      color: #cbd5f5;
       font-size: 18px;
-      max-width: 820px;
-      color: var(--muted);
+      max-width: 520px;
     }
 
-    /* NAV CARDS */
-    .nav-grid {
+    .hero img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 80px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 640px;
+      margin: auto;
+    }
+
+    /* ===== KNOWLEDGE CARDS ===== */
+    .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 32px;
-      margin: 64px 0;
     }
 
-    .nav-card {
+    .card {
       background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      text-decoration: none;
-      color: inherit;
-      transition: all 0.2s ease;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
     }
 
-    .nav-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-color: var(--accent);
+    .card:hover {
+      transform: translateY(-8px);
     }
 
-    .nav-card span {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
     }
 
-    .nav-card h3 {
-      font-size: 22px;
-      margin: 12px 0;
+    .card-body {
+      padding: 24px;
     }
 
-    .nav-card p {
-      font-size: 15px;
+    .card-body h3 {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .card-body p {
       color: var(--muted);
+      font-size: 15px;
     }
 
-    /* AI AGENT SECTION */
-    .ai-agent {
-      margin: 96px 0;
-      padding: 72px 24px;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #ffffff;
-      border-radius: 28px;
+    .btn {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--blue);
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
     }
 
-    .ai-container {
-      max-width: 1000px;
-      margin: 0 auto;
+    /* ===== AI SECTION ===== */
+    .ai-section {
+      background: #020617;
+      color: white;
+      border-radius: 32px;
+      padding: 64px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 48px;
       align-items: center;
     }
 
-    .ai-text h2 {
+    .ai-section h2 {
       font-size: 36px;
       margin-bottom: 16px;
     }
 
-    .ai-text p {
-      font-size: 16px;
-      color: #e5e7eb;
-      margin-bottom: 12px;
+    .ai-section p {
+      color: #cbd5e1;
+      margin-bottom: 16px;
     }
 
-    .ai-note {
-      margin-top: 16px;
-      font-size: 14px;
-      color: #cbd5f5;
-      font-style: italic;
-    }
-
-    /* AI WIDGET WITH IMAGE BACKGROUND */
-    .ai-widget {
-      position: relative;
-      background: #ffffff;
-      border-radius: 16px;
-      min-height: 520px;
+    .ai-box {
+      background: white;
+      border-radius: 20px;
+      height: 420px;
       overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      position: relative;
     }
 
-    .ai-avatar {
-      position: absolute;
-      inset: 0;
+    .ai-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0.25;
-      filter: grayscale(20%);
-      z-index: 1;
     }
 
-    .ai-widget::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        rgba(255,255,255,0.95),
-        rgba(255,255,255,0.6),
-        rgba(255,255,255,0.3)
-      );
-      z-index: 1;
-    }
-
-    .ai-widget iframe,
-    .ai-widget > div {
-      position: relative;
-      z-index: 2;
-    }
-
+    /* ===== FOOTER ===== */
     footer {
-      margin-top: 96px;
       padding: 32px;
       text-align: center;
+      color: var(--muted);
       font-size: 14px;
-      color: #64748b;
     }
 
-    /* MOBILE */
     @media (max-width: 900px) {
-      .ai-container {
+      .hero-inner, .ai-section {
         grid-template-columns: 1fr;
-      }
-
-      .hero h2 {
-        font-size: 36px;
       }
     }
   </style>
 </head>
-
 <body>
 
+<!-- HEADER -->
 <header>
-  <h1>RiskDecoded.org - Risk Management Knowledge</h1>
+  <div class="nav">
+    <div class="brand">Risk Decoded</div>
+    <nav class="menu">
+      <a href="about.html">About Us</a>
+      <a href="knowledge.html">Knowledge</a>
+      <a href="contact.html">Let’s Get Connect</a>
+    </nav>
+  </div>
 </header>
 
-<main>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Decoding Risk.<br>Empowering Better Decisions.</h1>
+      <p>
+        Risk Decoded is a public knowledge platform designed to make
+        risk management concepts, frameworks, and tools clear,
+        practical, and accessible — supported by an AI Risk Agent.
+      </p>
+    </div>
+    <img src="risk-management-8925447_1920.png" alt="Risk Illustration">
+  </div>
+</section>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h2>Risk Management, Decoded.</h2>
-    <p>
-      A public knowledge platform that explains risk management concepts,
-      frameworks, tools, and real-world practices — designed to help you
-      make better decisions under uncertainty.
-    </p>
-  </section>
+<!-- KNOWLEDGE -->
+<section>
+  <div class="container">
+    <div class="section-title">
+      <h2>Risk Management Knowledge</h2>
+      <p>Explore foundations, international frameworks, and practical tools used across industries.</p>
+    </div>
 
-  <!-- NAVIGATION -->
-  <section class="nav-grid">
+    <div class="cards">
+      <div class="card">
+        <img src="markus-winkler-WkdzUQrKWys-unsplash.jpg">
+        <div class="card-body">
+          <h3>Foundations</h3>
+          <p>Understand what risk is, why it matters, and how organizations identify opportunities and threats.</p>
+          <a class="btn" href="knowledge.html#foundation">Learn More</a>
+        </div>
+      </div>
 
-    <a href="what-is-risk-management.html" class="nav-card">
-      <span>Foundation</span>
-      <h3>What Is Risk Management?</h3>
-      <p>Learn the fundamentals of risk, uncertainty, opportunity,
-        and threats based on global standards and best practices.</p>
-    </a>
+      <div class="card">
+        <img src="john-FlPc9_VocJ4-unsplash.jpg">
+        <div class="card-body">
+          <h3>Frameworks</h3>
+          <p>Explore ISO 31000 and globally recognized approaches to enterprise risk management.</p>
+          <a class="btn" href="knowledge.html#framework">Learn More</a>
+        </div>
+      </div>
 
-    <a href="iso-31000.html" class="nav-card">
-      <span>Framework</span>
-      <h3>ISO 31000</h3>
-      <p>The global standard for risk management - Understand the ISO 31000 principles, framework, and process
-        explained in a practical and visual way.</p>
-    </a>
+      <div class="card">
+        <img src="scott-graham-5fNmWej4tAA-unsplash.jpg">
+        <div class="card-body">
+          <h3>Tools & Practice</h3>
+          <p>Risk registers, matrices, KRIs, and practical examples from real-world scenarios.</p>
+          <a class="btn" href="knowledge.html#tools">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <a href="risk-management-tools.html" class="nav-card">
-      <span>Tools</span>
-      <h3>Risk Management Tools</h3>
-      <p>Explore risk registers, risk matrices, and key risk indicators
-        with practical templates and examples.</p>
-    </a>
-
-    <a href="global-risk-cases.html" class="nav-card">
-      <span>Practice</span>
-      <h3>Global Risk Cases</h3>
-      <p>How risk management is applied worldwide.</p>
-    </a>
-
-  </section>
-
-  <!-- AI AGENT -->
-  <section class="ai-agent">
-    <div class="ai-container">
-
-      <div class="ai-text">
+<!-- AI RISK AGENT -->
+<section>
+  <div class="container">
+    <div class="ai-section">
+      <div>
         <h2>Ask the AI Risk Agent</h2>
         <p>
-          Have questions about ISO 31000, risk registers,
-          matrices, or real-world applications?
+          Have questions about ISO 31000, risk matrices, registers,
+          or how risk management works in practice?
         </p>
         <p>
           The AI Risk Agent helps explain concepts, clarify terminology,
           and support learning using established risk management knowledge.
         </p>
-        <p class="ai-note">
-          Try asking: “Explain ISO 31000 in simple terms” or
-          “How do I design a risk register?”
-        </p>
+        <p><em>Try asking: “Explain ISO 31000 in simple terms.”</em></p>
       </div>
 
-      <div class="ai-widget">
-        <img
-          src="Gemini_Generated_Image_n1czq3n1czq3n1cz.png"
-          alt="AI Risk Agent"
-          class="ai-avatar"
-        />
+      <div class="ai-box">
+        <img src="Gemini_Generated_Image_n1czq3n1czq3n1cz.png" alt="AI Risk Agent">
       </div>
-
     </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <footer>
-  © 2026 RiskDecoded.org — As Trusted and Open Source Risk Management Knowledge Platform
+  © 2026 Risk Decoded · Public Risk Management Knowledge Platform
 </footer>
 
-<!-- CHATBASE AI AGENT -->
+<!-- Chatbase AI Widget -->
 <script>
 (function(){
-  if(!window.chatbase || window.chatbase("getState") !== "initialized") {
-    window.chatbase = (...arguments) => {
-      if(!window.chatbase.q){ window.chatbase.q = [] }
-      window.chatbase.q.push(arguments)
-    };
-    window.chatbase = new Proxy(window.chatbase, {
-      get(target, prop) {
-        if(prop === "q") { return target.q }
-        return (...args) => target(prop, ...args)
-      }
-    })
-  }
-  const onLoad = function() {
-    const script = document.createElement("script");
-    script.src = "https://www.chatbase.co/embed.min.js";
-    script.id = "m9AEqzv4poxu_8_m0NV6H";
-    script.domain = "www.chatbase.co";
-    document.body.appendChild(script);
-  };
-  if(document.readyState === "complete") {
-    onLoad();
-  } else {
-    window.addEventListener("load", onLoad);
-  }
-})();
+if(!window.chatbase||window.chatbase("getState")!=="initialized"){
+window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}
+window.chatbase.q.push(arguments)};
+window.chatbase=new Proxy(window.chatbase,{
+get(target,prop){if(prop==="q"){return target.q}
+return(...args)=>target(prop,...args)}})}
+const onLoad=function(){
+const script=document.createElement("script");
+script.src="https://www.chatbase.co/embed.min.js";
+script.id="m9AEqzv4poxu_8_m0NV6H";
+script.domain="www.chatbase.co";
+document.body.appendChild(script)};
+if(document.readyState==="complete"){onLoad()}
+else{window.addEventListener("load",onLoad)}})();
 </script>
 
 </body>

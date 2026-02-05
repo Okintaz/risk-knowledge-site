@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us — Risk Decoded</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --dark: #0f172a;
+      --blue: #2563eb;
+      --light: #f8fafc;
+      --muted: #64748b;
+      --card: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--blue);
+    }
+
+    .menu {
+      display: flex;
+      gap: 24px;
+      font-weight: 500;
+    }
+
+    .menu a:hover { color: var(--blue); }
+
+    /* HERO */
+    .hero {
+      padding: 100px 24px;
+      background: linear-gradient(120deg, #020617, #1e3a8a);
+      color: white;
+    }
+
+    .hero-inner {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #cbd5f5;
+      max-width: 720px;
+    }
+
+    /* SECTION */
+    section {
+      padding: 80px 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .section-title {
+      margin-bottom: 48px;
+    }
+
+    .section-title h2 {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    /* GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .grid img {
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+
+    .card {
+      background: var(--card);
+      padding: 36px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    footer {
+      padding: 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <div class="brand">Risk Decoded</div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="knowledge.html">Knowledge</a>
+      <a href="contact.html">Let’s Get Connect</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>About Risk Decoded</h1>
+    <p>
+      Risk Decoded is a public knowledge initiative built to demystify
+      risk management — turning complex frameworks, tools, and practices
+      into clear, practical insights that anyone can understand and apply.
+    </p>
+  </div>
+</section>
+
+<!-- PURPOSE -->
+<section>
+  <div class="container grid">
+    <div class="card">
+      <h3>Our Purpose</h3>
+      <p>
+        Risk Decoded was created with a simple belief: risk management
+        should not be intimidating, abstract, or limited to specialists.
+      </p>
+      <p>
+        In reality, risk affects every organization, project, and decision —
+        from financial stability and operational continuity to reputation,
+        compliance, and strategic growth.
+      </p>
+      <p>
+        This platform exists to make risk management knowledge accessible,
+        structured, and actionable — supported by globally recognized
+        frameworks such as ISO 31000 and real-world practices.
+      </p>
+    </div>
+
+    <img src="markus-winkler-WkdzUQrKWys-unsplash.jpg" alt="Risk discussion">
+  </div>
+</section>
+
+<!-- BACKGROUND -->
+<section>
+  <div class="container grid">
+    <img src="scott-graham-5fNmWej4tAA-unsplash.jpg" alt="Collaboration">
+
+    <div class="card">
+      <h3>Background</h3>
+      <p>
+        Across industries, risk management is often implemented as a
+        compliance exercise — documents are created, registers are filled,
+        and matrices are drawn, yet the underlying understanding remains limited.
+      </p>
+      <p>
+        Risk Decoded takes a different approach. We focus on explaining
+        the <strong>why</strong> behind risk practices, not just the <strong>how</strong>.
+        This includes understanding uncertainty, decision-making trade-offs,
+        and the balance between opportunity and threat.
+      </p>
+      <p>
+        By combining structured knowledge, visual explanations,
+        and an AI-powered Risk Agent, we aim to support continuous learning
+        and better risk-informed decisions.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section>
+  <div class="container grid">
+    <div class="card">
+      <h3>Who This Platform Is For</h3>
+      <p>
+        Risk Decoded is designed for a broad audience — from students and
+        early-career professionals to managers, analysts, and decision-makers.
+      </p>
+      <p>
+        Whether you are learning risk management for the first time,
+        implementing ISO 31000 in your organization, or simply seeking
+        clarity on risk tools such as registers, matrices, and KRIs,
+        this platform is built to support you.
+      </p>
+      <p>
+        The content is intentionally vendor-neutral, educational,
+        and focused on long-term capability building rather than
+        short-term consulting outcomes.
+      </p>
+    </div>
+
+    <img src="john-FlPc9_VocJ4-unsplash.jpg" alt="Learning and analysis">
+  </div>
+</section>
+
+<footer>
+  © 2026 Risk Decoded · Building risk awareness through knowledge
+</footer>
+
+</body>
+</html>
