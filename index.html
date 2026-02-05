@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Risk Management Knowledge Hub</title>
+  <title>RiskDecoded — Risk Management Knowledge Hub</title>
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,78 +11,109 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f8fafc;
-      color: #0f172a;
+    :root {
+      --primary: #0f172a;
+      --accent: #e60012;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --muted: #475569;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+      line-height: 1.6;
+    }
+
+    /* Header */
     header {
-      background: white;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
       padding: 20px 32px;
-      border-bottom: 1px solid #e5e7eb;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
       font-weight: 600;
     }
 
+    /* Hero */
     .hero {
-      padding: 80px 32px;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
+      max-width: 1100px;
+      margin: 72px auto 48px;
+      padding: 0 24px;
     }
 
-    .hero h1 {
+    .hero h2 {
       font-size: 44px;
-      max-width: 900px;
       line-height: 1.2;
       margin-bottom: 16px;
     }
 
     .hero p {
       font-size: 18px;
-      max-width: 700px;
-      color: #cbd5f5;
+      max-width: 800px;
+      color: var(--muted);
     }
 
-    main {
+    /* Navigation Grid */
+    .nav-grid {
       max-width: 1100px;
-      margin: 0 auto;
-      padding: 64px 32px;
-    }
-
-    section {
-      margin-bottom: 64px;
-    }
-
-    h2 {
-      font-size: 28px;
-      margin-bottom: 16px;
-    }
-
-    p {
-      line-height: 1.7;
-      color: #475569;
-    }
-
-    .cards {
+      margin: 56px auto;
+      padding: 0 24px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 32px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
     }
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    }
-
-    footer {
-      background: white;
-      border-top: 1px solid #e5e7eb;
-      text-align: center;
+    .nav-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
       padding: 32px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+    }
+
+    .nav-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-color: var(--accent);
+    }
+
+    .nav-card span {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-card h3 {
+      font-size: 22px;
+      margin: 12px 0;
+    }
+
+    .nav-card p {
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 96px;
+      padding: 32px;
+      text-align: center;
       font-size: 14px;
       color: #64748b;
     }
@@ -92,110 +123,67 @@
 <body>
 
 <header>
-  Risk Management Knowledge Hub
+  <h1>RiskDecoded.org</h1>
 </header>
 
-<section class="hero">
-  <section class="hero">
-  <h1>Risk Management Knowledge & Advisory Hub</h1>
-  <p>
-    A public educational platform providing clear explanations of
-    risk management concepts, frameworks, and best practices.
-    Supported by an AI-powered Risk Agent to help answer your questions.
-  </p>
-</section>
-
-
 <main>
-  <section>
-    <section>
-  <h2>Risk Management Frameworks</h2>
-  <p>
-    Risk management frameworks provide structured guidance for identifying,
-    assessing, and managing risks in a consistent and repeatable manner.
-    One of the most widely adopted frameworks is ISO 31000.
-  </p>
 
-  <div class="cards">
-    <div class="card">
-      <h3>ISO 31000</h3>
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Risk Management, Decoded.</h2>
+    <p>
+      A public knowledge platform explaining risk management concepts,
+      frameworks, tools, and real-world practices — supported by an
+      AI-powered Risk Agent to help you learn and apply risk thinking.
+    </p>
+  </section>
+
+  <!-- NAVIGATION -->
+  <section class="nav-grid">
+
+    <a href="what-is-risk-management.html" class="nav-card">
+      <span>Foundation</span>
+      <h3>What Is Risk Management?</h3>
       <p>
-        An international standard that outlines principles, a framework,
-        and a process for managing risk across organizations.
+        Learn the fundamentals of risk, uncertainty, opportunity,
+        and threats based on global standards and best practices.
       </p>
-    </div>
-    <div class="card">
-      <h3>Enterprise Risk Management (ERM)</h3>
+    </a>
+
+    <a href="iso-31000.html" class="nav-card">
+      <span>Framework</span>
+      <h3>Risk Management — ISO 31000</h3>
       <p>
-        A holistic approach that considers strategic, financial,
-        operational, and compliance risks collectively.
+        Understand the ISO 31000 principles, framework, and process
+        explained in a practical and visual way.
       </p>
-    </div>
-    <div class="card">
-      <h3>Risk Appetite & Tolerance</h3>
+    </a>
+
+    <a href="risk-management-tools.html" class="nav-card">
+      <span>Tools</span>
+      <h3>Risk Management Tools</h3>
       <p>
-        Defines how much risk an organization is willing to accept
-        in pursuit of its objectives.
+        Explore risk registers, risk matrices, and key risk indicators
+        with practical templates and examples.
       </p>
-    </div>
-  </div>
-</section>
+    </a>
 
-  <section>
-    <h2>Why Risk Management Matters</h2>
-    <div class="card">
-  <h3>Informed Decision-Making</h3>
-  <p>
-    Risk management enables leaders to evaluate uncertainty
-    and make decisions with a clearer understanding of potential outcomes.
-  </p>
-</div>
-
-<div class="card">
-  <h3>Governance & Accountability</h3>
-  <p>
-    It supports strong governance by clarifying risk ownership,
-    controls, and reporting responsibilities.
-  </p>
-</div>
-
-<div class="card">
-  <h3>Resilience & Sustainability</h3>
-  <p>
-    Organizations with mature risk practices are better prepared
-    to respond to disruption and long-term challenges.
-  </p>
-</div>
+    <a href="global-risk-cases.html" class="nav-card">
+      <span>Practice</span>
+      <h3>Global Risk Management Cases</h3>
+      <p>
+        See how organizations around the world apply risk management
+        across finance, operations, technology, and governance.
+      </p>
+    </a>
 
   </section>
 
-  <section>
-    <section>
-  <h2>AI Risk Agent</h2>
-  <p>
-    The AI Risk Agent is designed to help users understand
-    risk management concepts, terminology, and frameworks.
-    It can explain definitions, provide examples, and clarify
-    how risk management is applied in practice.
-  </p>
-  <p>
-    This AI does not provide legal, financial, or investment advice.
-    It is intended for educational and informational purposes only.
-  </p>
-</section>
-
-  </section>
 </main>
 
 <footer>
-  © 2026 Risk Management Knowledge Hub · Public Educational Website  
-  <br>
-  <em>
-    Educational use only. This site does not provide legal,
-    financial, or investment advice.
-  </em>
+  © 2026 RiskDecoded.org — Public Risk Management Knowledge Hub
 </footer>
-
 
 </body>
 </html>
