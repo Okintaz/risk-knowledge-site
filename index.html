@@ -50,7 +50,7 @@
       padding: 0 24px;
     }
 
-    /* Hero */
+    /* HERO */
     .hero h2 {
       font-size: 44px;
       line-height: 1.2;
@@ -59,11 +59,11 @@
 
     .hero p {
       font-size: 18px;
-      max-width: 800px;
+      max-width: 820px;
       color: var(--muted);
     }
 
-    /* Navigation cards */
+    /* NAV CARDS */
     .nav-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -78,7 +78,7 @@
       padding: 32px;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     .nav-card:hover {
@@ -105,7 +105,7 @@
       color: var(--muted);
     }
 
-    /* AI Agent Section */
+    /* AI AGENT SECTION */
     .ai-agent {
       margin: 96px 0;
       padding: 72px 24px;
@@ -141,12 +141,44 @@
       font-style: italic;
     }
 
+    /* AI WIDGET WITH IMAGE BACKGROUND */
     .ai-widget {
+      position: relative;
       background: #ffffff;
       border-radius: 16px;
-      padding: 16px;
       min-height: 520px;
+      overflow: hidden;
       box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    .ai-avatar {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.25;
+      filter: grayscale(20%);
+      z-index: 1;
+    }
+
+    .ai-widget::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(255,255,255,0.95),
+        rgba(255,255,255,0.6),
+        rgba(255,255,255,0.3)
+      );
+      z-index: 1;
+    }
+
+    .ai-widget iframe,
+    .ai-widget > div {
+      position: relative;
+      z-index: 2;
     }
 
     footer {
@@ -157,7 +189,7 @@
       color: #64748b;
     }
 
-    /* Mobile */
+    /* MOBILE */
     @media (max-width: 900px) {
       .ai-container {
         grid-template-columns: 1fr;
@@ -184,7 +216,7 @@
     <p>
       A public knowledge platform that explains risk management concepts,
       frameworks, tools, and real-world practices — designed to help you
-      think clearly and make better decisions under uncertainty.
+      make better decisions under uncertainty.
     </p>
   </section>
 
@@ -194,37 +226,25 @@
     <a href="what-is-risk-management.html" class="nav-card">
       <span>Foundation</span>
       <h3>What Is Risk Management?</h3>
-      <p>
-        Understand uncertainty, opportunity, and threat — and how
-        risk management supports better decisions.
-      </p>
+      <p>Understand uncertainty, opportunity, and threat.</p>
     </a>
 
     <a href="iso-31000.html" class="nav-card">
       <span>Framework</span>
-      <h3>Risk Management — ISO 31000</h3>
-      <p>
-        Learn the principles, framework, and process behind the
-        global risk management standard.
-      </p>
+      <h3>ISO 31000</h3>
+      <p>The global standard for risk management.</p>
     </a>
 
     <a href="risk-management-tools.html" class="nav-card">
       <span>Tools</span>
       <h3>Risk Management Tools</h3>
-      <p>
-        Explore risk registers, risk matrices, and key risk indicators
-        with practical examples.
-      </p>
+      <p>Registers, matrices, and KRIs explained.</p>
     </a>
 
     <a href="global-risk-cases.html" class="nav-card">
       <span>Practice</span>
-      <h3>Global Risk Management Cases</h3>
-      <p>
-        See how organizations worldwide apply risk management
-        across industries and sectors.
-      </p>
+      <h3>Global Risk Cases</h3>
+      <p>How risk management is applied worldwide.</p>
     </a>
 
   </section>
@@ -232,16 +252,16 @@
   <!-- AI AGENT -->
   <section class="ai-agent">
     <div class="ai-container">
+
       <div class="ai-text">
         <h2>Ask the AI Risk Agent</h2>
         <p>
-          Have questions about risk management concepts, ISO 31000,
-          risk registers, matrices, or real-world applications?
+          Have questions about ISO 31000, risk registers,
+          matrices, or real-world applications?
         </p>
         <p>
-          The AI Risk Agent is designed to help explain concepts,
-          clarify terminology, and support learning using
-          established risk management knowledge.
+          The AI Risk Agent helps explain concepts, clarify terminology,
+          and support learning using established risk management knowledge.
         </p>
         <p class="ai-note">
           Try asking: “Explain ISO 31000 in simple terms” or
@@ -250,8 +270,13 @@
       </div>
 
       <div class="ai-widget">
-        <!-- Chatbase widget renders here -->
+        <img
+          src="Gemini_Generated_Image_n1czq3n1czq3n1cz.png"
+          alt="AI Risk Agent"
+          class="ai-avatar"
+        />
       </div>
+
     </div>
   </section>
 
@@ -261,7 +286,7 @@
   © 2026 RiskDecoded.org — Public Risk Management Knowledge Platform
 </footer>
 
-<!-- Chatbase AI Agent -->
+<!-- CHATBASE AI AGENT -->
 <script>
 (function(){
   if(!window.chatbase || window.chatbase("getState") !== "initialized") {
