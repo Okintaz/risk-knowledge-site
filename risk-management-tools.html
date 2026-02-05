@@ -15,7 +15,7 @@
       font-family: "Inter", sans-serif;
       background: #f8fafc;
       color: #0f172a;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     header {
@@ -43,13 +43,24 @@
 
     h3 {
       font-size: 28px;
-      margin-top: 72px;
+      margin-top: 80px;
       margin-bottom: 12px;
     }
 
     p {
       color: #475569;
-      max-width: 950px;
+      max-width: 980px;
+      margin-bottom: 12px;
+    }
+
+    ul {
+      max-width: 980px;
+      padding-left: 20px;
+      color: #475569;
+    }
+
+    li {
+      margin-bottom: 8px;
     }
 
     .card {
@@ -57,7 +68,7 @@
       border: 1px solid #e5e7eb;
       border-radius: 16px;
       padding: 28px;
-      margin-top: 24px;
+      margin: 28px 0;
       overflow-x: auto;
     }
 
@@ -129,10 +140,15 @@
   <section>
     <h2>Risk Management Tools</h2>
     <p>
-      Risk management tools translate uncertainty into structured, actionable
-      information. These tools support organizations in identifying, assessing,
-      prioritizing, monitoring, and responding to risks across different
-      functions and industries.
+      Risk management tools enable organizations to transform uncertainty
+      into structured insight and informed action. While frameworks such as
+      ISO 31000 define principles and processes, tools are what make risk
+      management operational in daily decision-making.
+    </p>
+    <p>
+      This page introduces three core tools widely used across industries:
+      the <strong>Risk Register</strong>, <strong>Risk Matrix</strong>,
+      and <strong>Key Risk Indicators (KRIs)</strong>.
     </p>
   </section>
 
@@ -140,14 +156,21 @@
   <section>
     <h3>1. Risk Register</h3>
     <p>
-      A risk register is the central record of an organization’s risk profile.
-      It captures identified risks, their causes and impacts, assessment results,
-      ownership, and mitigation actions.
+      A risk register is the central repository of identified risks within
+      an organization. It captures what could happen, why it might occur,
+      the potential consequences, and how risks are being managed.
     </p>
     <p>
-      Importantly, the risk register distinguishes between
-      <strong>inherent risk</strong> (before controls) and
-      <strong>residual risk</strong> (after controls are applied).
+      Risk registers are used by business units, risk owners, risk management
+      functions, and senior leadership to support transparency, accountability,
+      and consistent assessment across the organization.
+    </p>
+    <p>
+      A key feature of an effective risk register is the distinction between
+      <strong>inherent risk</strong> (risk before controls) and
+      <strong>residual risk</strong> (risk remaining after controls).
+      This distinction allows management to assess control effectiveness and
+      determine whether additional treatment is required.
     </p>
 
     <div class="card">
@@ -235,46 +258,16 @@
             <td>Corporate Communications</td>
             <td>Monitored</td>
           </tr>
-          <tr>
-            <td>5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>6</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          <tr><td>5</td><td colspan="13"></td></tr>
+          <tr><td>6</td><td colspan="13"></td></tr>
         </tbody>
       </table>
     </div>
 
     <p>
-      The risk register is a living document and should be reviewed regularly
-      to reflect changes in internal conditions, external environment, and
-      control effectiveness.
+      Risk registers should be reviewed at least quarterly and updated whenever
+      there are significant changes in strategy, operations, regulations,
+      or the external environment.
     </p>
   </section>
 
@@ -282,74 +275,54 @@
   <section>
     <h3>2. Risk Matrix</h3>
     <p>
-      A risk matrix is used to visualize and prioritize risks based on
-      their likelihood and impact. It supports consistent risk evaluation
-      and decision-making.
+      A risk matrix is a visual prioritization tool that combines likelihood
+      and impact to categorize risk severity. Its primary purpose is to support
+      consistent decision-making and focus management attention on the most
+      significant risks.
     </p>
     <p>
-      Risk matrices are typically applied to both
-      <strong>inherent risk</strong> and <strong>residual risk</strong>
-      to assess the effectiveness of controls.
+      Risk matrices are widely used by management teams, risk committees,
+      and boards to compare risks across functions and assess alignment with
+      the organization’s risk appetite and tolerance.
     </p>
 
     <div class="card">
       <div class="matrix">
         <div class="label">Impact ↓ / Likelihood →</div>
-        <div class="label">1</div>
-        <div class="label">2</div>
-        <div class="label">3</div>
-        <div class="label">4</div>
-        <div class="label">5</div>
-
-        <div class="label">5</div>
-        <div class="medium">M</div>
-        <div class="high">H</div>
-        <div class="high">H</div>
-        <div class="extreme">E</div>
-        <div class="extreme">E</div>
-
-        <div class="label">4</div>
-        <div class="medium">M</div>
-        <div class="medium">M</div>
-        <div class="high">H</div>
-        <div class="high">H</div>
-        <div class="extreme">E</div>
-
-        <div class="label">3</div>
-        <div class="low">L</div>
-        <div class="medium">M</div>
-        <div class="medium">M</div>
-        <div class="high">H</div>
-        <div class="high">H</div>
-
-        <div class="label">2</div>
-        <div class="low">L</div>
-        <div class="low">L</div>
-        <div class="medium">M</div>
-        <div class="medium">M</div>
-        <div class="high">H</div>
-
-        <div class="label">1</div>
-        <div class="low">L</div>
-        <div class="low">L</div>
-        <div class="low">L</div>
-        <div class="medium">M</div>
-        <div class="medium">M</div>
+        <div class="label">1</div><div class="label">2</div><div class="label">3</div><div class="label">4</div><div class="label">5</div>
+        <div class="label">5</div><div class="medium">M</div><div class="high">H</div><div class="high">H</div><div class="extreme">E</div><div class="extreme">E</div>
+        <div class="label">4</div><div class="medium">M</div><div class="medium">M</div><div class="high">H</div><div class="high">H</div><div class="extreme">E</div>
+        <div class="label">3</div><div class="low">L</div><div class="medium">M</div><div class="medium">M</div><div class="high">H</div><div class="high">H</div>
+        <div class="label">2</div><div class="low">L</div><div class="low">L</div><div class="medium">M</div><div class="medium">M</div><div class="high">H</div>
+        <div class="label">1</div><div class="low">L</div><div class="low">L</div><div class="low">L</div><div class="medium">M</div><div class="medium">M</div>
       </div>
     </div>
 
     <p>
-      Risk levels shown in the matrix guide management actions, escalation,
-      and alignment with the organization’s risk appetite and tolerance.
+      In practice, the matrix is applied twice: once for inherent risk and again
+      for residual risk. Comparing the two provides insight into whether controls
+      are reducing risk to acceptable levels.
+    </p>
+    <p>
+      It is important to avoid false precision. Risk scores rely on judgment
+      and assumptions, so the matrix should be used as a decision-support tool,
+      not as a mechanical calculation. Regular calibration is essential to ensure
+      consistent scoring across the organization.
     </p>
   </section>
 
   <!-- KRI -->
   <section>
-    <h3>3. Key Risk Indicators (KRI)</h3>
+    <h3>3. Key Risk Indicators (KRIs)</h3>
     <p>
-      Key Risk Indicators (KRIs) are measurable metrics that provide
-      early warning signals of increasing risk exposure.
+      Key Risk Indicators (KRIs) are metrics designed to provide early warning
+      signals of increasing risk exposure. Unlike performance indicators,
+      KRIs focus on potential future issues rather than past results.
+    </p>
+    <p>
+      KRIs are used by operational teams, risk management functions, and senior
+      leadership to monitor trends, trigger escalation, and support proactive
+      intervention before risks materialize.
     </p>
 
     <div class="card">
@@ -394,8 +367,14 @@
     </div>
 
     <p>
-      Effective KRIs focus on trends and thresholds rather than
-      historical outcomes, enabling proactive risk management.
+      Effective KRIs are closely linked to key risks and their underlying drivers.
+      They should be measurable, timely, predictive, and clearly connected to
+      management actions.
+    </p>
+    <p>
+      KRIs should be reviewed regularly and adjusted as risks, strategies,
+      and operating environments evolve. Well-designed KRIs support proactive
+      risk management, while poorly designed ones create noise and false comfort.
     </p>
   </section>
 
