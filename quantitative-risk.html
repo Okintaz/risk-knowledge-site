@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quantitative Risk Approach — Risk Decoded</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.8;
+    }
+
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 20px;
+      color: #2563eb;
+    }
+
+    .menu a {
+      margin-left: 24px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #0f172a;
+    }
+
+    section {
+      padding: 80px 24px;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 44px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin-top: 80px;
+      font-size: 30px;
+      border-left: 4px solid #2563eb;
+      padding-left: 14px;
+    }
+
+    h3 {
+      margin-top: 28px;
+      font-size: 20px;
+    }
+
+    p {
+      color: #475569;
+      margin-top: 14px;
+    }
+
+    .figure {
+      margin: 36px 0;
+      text-align: center;
+    }
+
+    .figure img {
+      max-width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.15);
+    }
+
+    .caption {
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 36px;
+      font-size: 14px;
+      color: #64748b;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">Risk Decoded</div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="knowledge.html">Knowledge</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    <h1>Quantitative Risk Approach</h1>
+
+    <p>
+      Quantitative risk management represents a structured attempt to understand
+      uncertainty using numerical techniques, probability theory, and statistical
+      modeling. Within the ISO 31000 framework, quantitative analysis does not
+      replace judgment or qualitative assessment, but enhances decision-making
+      where uncertainty can be reasonably measured.
+    </p>
+
+    <p>
+      Organizations typically apply quantitative methods when risk exposure is
+      material, decisions are irreversible or long-term, and outcomes can be
+      expressed in measurable terms such as financial loss, schedule delay, or
+      capacity impact.
+    </p>
+
+    <!-- EXPECTED VALUE -->
+    <h2>1. Expected Value (EV)</h2>
+
+    <div class="figure">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Expected_value.png" alt="Expected value illustration">
+      <div class="caption">
+        Source: Wikipedia — Expected Value  
+        https://en.wikipedia.org/wiki/Expected_value
+      </div>
+    </div>
+
+    <p>
+      Expected Value is one of the most fundamental quantitative risk concepts.
+      It represents the probability-weighted average of all possible outcomes.
+      While deceptively simple, it forms the foundation of many advanced risk
+      and decision models.
+    </p>
+
+    <p>
+      In practical terms, Expected Value answers the question:
+      <em>“If this uncertain situation were repeated many times, what would the
+      average outcome be?”</em> This makes it particularly useful for comparing
+      alternatives that involve trade-offs between risk and reward.
+    </p>
+
+    <p>
+      Expected Value is widely used in project risk analysis, investment appraisal,
+      insurance pricing, and operational decision-making. However, it must be
+      interpreted carefully: two options can have the same expected value but
+      very different risk profiles.
+    </p>
+
+    <p>
+      From a governance perspective, Expected Value should be used alongside
+      risk appetite and tolerance considerations. A decision with positive
+      expected value may still be unacceptable if potential downside exceeds
+      organizational tolerance.
+    </p>
+
+    <!-- SENSITIVITY ANALYSIS -->
+    <h2>2. Sensitivity Analysis</h2>
+
+    <div class="figure">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Sensitivity_analysis_tornado_diagram.png" alt="Sensitivity analysis tornado diagram">
+      <div class="caption">
+        Source: Wikipedia — Sensitivity Analysis  
+        https://en.wikipedia.org/wiki/Sensitivity_analysis
+      </div>
+    </div>
+
+    <p>
+      Sensitivity analysis examines how changes in individual input variables
+      affect an outcome, holding other factors constant. Its primary objective
+      is not prediction, but understanding influence and vulnerability.
+    </p>
+
+    <p>
+      In risk management practice, sensitivity analysis helps identify
+      “risk drivers” — variables that disproportionately affect outcomes.
+      This insight allows organizations to focus mitigation, controls, and
+      monitoring efforts on the most critical assumptions.
+    </p>
+
+    <p>
+      Tornado diagrams are commonly used to visualize sensitivity results,
+      ranking variables by their impact. These visuals are especially effective
+      in executive and board-level discussions, where clarity and prioritization
+      are essential.
+    </p>
+
+    <p>
+      Sensitivity analysis is most valuable in early planning stages, when
+      assumptions are uncertain and decisions are still flexible. It is often
+      used as a precursor to more advanced simulation techniques.
+    </p>
+
+    <!-- SCENARIO ANALYSIS -->
+    <h2>3. Scenario Analysis</h2>
+
+    <div class="figure">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Scenario_analysis_diagram.png" alt="Scenario analysis example">
+      <div class="caption">
+        Source: Wikipedia — Scenario Analysis  
+        https://en.wikipedia.org/wiki/Scenario_analysis
+      </div>
+    </div>
+
+    <p>
+      Scenario analysis evaluates outcomes under a set of internally consistent
+      assumptions representing different possible futures. Unlike sensitivity
+      analysis, which isolates variables, scenario analysis considers how
+      multiple factors may interact.
+    </p>
+
+    <p>
+      Scenarios are often framed as best-case, base-case, and worst-case outcomes,
+      but more sophisticated applications may involve macroeconomic, geopolitical,
+      climate, or regulatory scenarios.
+    </p>
+
+    <p>
+      Scenario analysis plays a critical role in strategic planning, enterprise
+      risk management, and regulatory stress testing. It supports resilience by
+      helping organizations anticipate and prepare for uncertainty beyond
+      historical experience.
+    </p>
+
+    <p>
+      Importantly, scenario analysis encourages structured thinking about
+      uncertainty and avoids false precision. It is as much a communication
+      and learning tool as it is a quantitative technique.
+    </p>
+
+    <!-- MONTE CARLO -->
+    <h2>4. Monte Carlo Simulation</h2>
+
+    <div class="figure">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Monte_Carlo_simulation.png" alt="Monte Carlo simulation distribution">
+      <div class="caption">
+        Source: Wikipedia — Monte Carlo Method  
+        https://en.wikipedia.org/wiki/Monte_Carlo_method
+      </div>
+    </div>
+
+    <p>
+      Monte Carlo simulation represents one of the most powerful tools in
+      quantitative risk analysis. Rather than relying on single-point estimates,
+      it models uncertainty by running thousands (or millions) of simulations
+      using probability distributions.
+    </p>
+
+    <p>
+      The output of a Monte Carlo simulation is not a single number, but a
+      distribution of possible outcomes. This allows decision-makers to
+      understand likelihood, confidence levels, and tail risks.
+    </p>
+
+    <p>
+      Monte Carlo simulation is widely used in portfolio risk management,
+      capital projects, energy markets, insurance, and quantitative finance.
+      It is especially useful when multiple uncertain variables interact
+      in non-linear ways.
+    </p>
+
+    <p>
+      However, Monte Carlo results are only as reliable as the assumptions
+      and input distributions used. Governance, transparency, and expert
+      judgment are essential to avoid false confidence.
+    </p>
+
+    <!-- VAR -->
+    <h2>5. Value at Risk (VaR)</h2>
+
+    <div class="figure">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Value_at_Risk.png" alt="Value at Risk distribution">
+      <div class="caption">
+        Source: Wikipedia — Value at Risk  
+        https://en.wikipedia.org/wiki/Value_at_risk
+      </div>
+    </div>
+
+    <p>
+      Value at Risk (VaR) estimates the maximum expected loss over a specified
+      time horizon at a given confidence level. It has become a standard risk
+      metric in financial institutions and regulatory frameworks.
+    </p>
+
+    <p>
+      VaR is attractive because it condenses complex risk exposure into a
+      single, communicable number. This makes it useful for senior management,
+      regulators, and risk committees.
+    </p>
+
+    <p>
+      Despite its popularity, VaR has limitations. It does not describe losses
+      beyond the confidence threshold and can underestimate tail risk if
+      distributions are mis-specified.
+    </p>
+
+    <p>
+      Best practice requires VaR to be complemented by stress testing,
+      scenario analysis, and qualitative judgment.
+    </p>
+
+    <!-- STRESS TEST -->
+    <h2>6. Stress Testing</h2>
+
+    <div class="figure">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Stress_testing_financial_risk.png" alt="Stress testing financial risk">
+      <div class="caption">
+        Source: Wikipedia — Stress Testing  
+        https://en.wikipedia.org/wiki/Stress_test_(financial)
+      </div>
+    </div>
+
+    <p>
+      Stress testing evaluates the impact of extreme but plausible adverse
+      events on an organization’s financial, operational, or strategic position.
+      Unlike probabilistic models, stress testing focuses on severity and
+      resilience rather than likelihood.
+    </p>
+
+    <p>
+      It is widely used by regulators, financial institutions, and boards to
+      assess preparedness for systemic shocks, economic crises, or operational
+      disruptions.
+    </p>
+
+    <p>
+      Effective stress testing challenges assumptions, exposes vulnerabilities,
+      and supports contingency planning. It is a critical complement to
+      quantitative models that rely on historical data.
+    </p>
+
+    <h2>Perspective</h2>
+
+    <p>
+      Quantitative risk methods enhance understanding of uncertainty, but they
+      do not eliminate it. 
+      
+      When applied responsibly — in alignment with ISO 31000,
+      sound governance, and professional judgment — they significantly strengthen
+      risk-informed decision-making in corporate objectives.
+    </p>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 Risk Decoded · Quantitative Risk Knowledge
+</footer>
+
+</body>
+</html>
