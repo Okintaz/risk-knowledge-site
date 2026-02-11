@@ -51,9 +51,17 @@
     }
 
     .brand {
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-weight:800;
       font-size:20px;
       color:var(--blue);
+    }
+
+    .brand img {
+      height:32px;
+      width:auto;
     }
 
     .menu {
@@ -225,8 +233,10 @@
 
 <header>
   <div class="nav">
-    <img src="/images/10 (1).png" alt="Risk Decoded Logo">
-    <div class="brand">Risk Decoded</div>
+    <div class="brand">
+      <img src="/images/10 (1).png" alt="Risk Decoded Logo">
+      <span>Risk Decoded</span>
+    </div>
     <nav class="menu">
       <a href="about.html">About Us</a>
       <a href="knowledge.html">Knowledge</a>
@@ -265,7 +275,7 @@
     <div class="cards">
 
       <div class="card">
-        <img src="/images/pexels-ian-panelo-4576324.jpg" alt="Foundations">
+        <img src="/images/john-FlPc9_VocJ4-unsplash.jpg" alt="Foundations">
         <div class="card-body">
           <h3>Foundations</h3>
           <p>What risk is, why it matters, and how uncertainty affects objectives.</p>
@@ -274,7 +284,7 @@
       </div>
 
       <div class="card">
-        <img src="/images/john-FlPc9_VocJ4-unsplash.jpg" alt="Frameworks">
+        <img src="/images/scott-graham-5fNmWej4tAA-unsplash.jpg" alt="Frameworks">
         <div class="card-body">
           <h3>Frameworks</h3>
           <p>ISO 31000 and globally recognized approaches to risk management.</p>
@@ -283,16 +293,16 @@
       </div>
 
       <div class="card">
-        <img src="/images/scott-graham-5fNmWej4tAA-unsplash.jpg" alt="Risk Assessment">
+        <img src="/images/markus-winkler-WkdzUQrKWys-unsplash.jpg" alt="Risk Assessment">
         <div class="card-body">
           <h3>Risk Assessment Process</h3>
-          <p>End-to-end risk assessment based on best practices and ISO 31000.</p>
+          <p>End-to-end risk assessment based on ISO 31000 best practices.</p>
           <a class="btn" href="risk-assessment-process.html">Explore</a>
         </div>
       </div>
 
       <div class="card">
-        <img src="/images/pexels-ian-panelo-4494644.jpg" alt="Quantitative Risk">
+        <img src="/images/john-FlPc9_VocJ4-unsplash.jpg" alt="Quantitative Risk">
         <div class="card-body">
           <h3>Quantitative Risk Approach</h3>
           <p>Using probability, data, and simulation to quantify uncertainty.</p>
@@ -301,7 +311,7 @@
       </div>
 
       <div class="card">
-        <img src="/images/pexels-karola-g2-5775.jpg" alt="Templates">
+        <img src="/images/markus-winkler-WkdzUQrKWys-unsplash.jpg" alt="Templates">
         <div class="card-body">
           <h3>Risk Management Templates</h3>
           <p>Practical templates for registers, KRIs, matrices, and analysis tools.</p>
@@ -339,7 +349,7 @@
 </section>
 
 <footer>
-  © 2026 Risk Decoded · Public Risk Management Knowledge Platform - Mayongkoro & Co.
+  © 2026 Risk Decoded · Public Risk Management Knowledge Platform
 </footer>
 
 <!-- Chatbase AI Widget -->
