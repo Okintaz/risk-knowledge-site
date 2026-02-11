@@ -1,44 +1,286 @@
-<form action="https://formspree.io/f/mdalkjqb" method="POST">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Let’s Get Connected — Risk Decoded</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- Formspree Enhancements -->
-  <input type="hidden" name="_subject" value="New Inquiry — Risk Decoded">
-  <input type="hidden" name="_template" value="table">
-  <input type="text" name="_gotcha" style="display:none">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <div>
-    <label for="name">Full Name</label>
-    <input type="text" id="name" name="name" required />
+  <style>
+    :root {
+      --dark: #0f172a;
+      --blue: #2563eb;
+      --light: #f8fafc;
+      --muted: #64748b;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--blue);
+    }
+
+    .menu {
+      display: flex;
+      gap: 24px;
+      font-weight: 500;
+    }
+
+    .menu a:hover {
+      color: var(--blue);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 90px 24px;
+      background: linear-gradient(120deg, #020617, #1e3a8a);
+      color: white;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #cbd5f5;
+      max-width: 720px;
+    }
+
+    /* ===== CONTENT ===== */
+    section {
+      padding: 80px 24px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .intro {
+      margin-bottom: 48px;
+    }
+
+    .intro h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    /* ===== FORM CARD ===== */
+    .form-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 48px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .full {
+      grid-column: span 2;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+    }
+
+    button {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .note {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 720px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+      .full {
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="nav">
+    <div class="brand">Risk Decoded</div>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="knowledge.html">Knowledge</a>
+    </nav>
   </div>
+</header>
 
-  <div>
-    <label for="email">Email Address</label>
-    <input type="email" id="email" name="email" required />
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Let’s Get Connected</h1>
+    <p>
+      Have a question, idea, or potential collaboration in mind?
+      Feel free to reach out — thoughtful conversations are always welcome.
+    </p>
   </div>
+</section>
 
-  <div class="full">
-    <label for="topic">Inquiry Topic</label>
-    <select id="topic" name="topic">
-      <option value="General Question">General Question</option>
-      <option value="Risk Management Framework">Risk Management Framework</option>
-      <option value="Risk Assessment Process">Risk Assessment Process</option>
-      <option value="Quantitative Risk">Quantitative Risk</option>
-      <option value="Risk Tools & Templates">Risk Tools & Templates</option>
-      <option value="Collaboration / Discussion">Collaboration / Discussion</option>
-      <option value="Other">Other</option>
-    </select>
+<!-- CONTACT FORM -->
+<section>
+  <div class="container">
+
+    <div class="intro">
+      <h2>Contact & Inquiry</h2>
+      <p>
+        Use the form below to send your message.
+        Your details will only be used to respond to your inquiry.
+      </p>
+    </div>
+
+    <div class="form-card">
+      <form action="https://formspree.io/f/mdalkjqb" method="POST">
+
+        <div>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+
+        <div>
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+
+        <div class="full">
+          <label for="topic">Inquiry Topic</label>
+          <select id="topic" name="topic">
+            <option>General Question</option>
+            <option>Risk Management Framework</option>
+            <option>Risk Assessment & Tools</option>
+            <option>Quantitative Risk</option>
+            <option>Collaboration</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your inquiry here..." required></textarea>
+        </div>
+
+        <div class="full">
+          <button type="submit">Send Inquiry</button>
+        </div>
+
+      </form>
+
+      <div class="note">
+        This form securely delivers your message without exposing contact details publicly.
+      </div>
+    </div>
+
   </div>
+</section>
 
-  <div class="full">
-    <label for="message">Message</label>
-    <textarea
-      id="message"
-      name="message"
-      placeholder="Write your inquiry here..."
-      required></textarea>
-  </div>
+<footer>
+  © 2026 Risk Decoded · Thoughtful conversations about risk and uncertainty
+</footer>
 
-  <div class="full">
-    <button type="submit">Send Inquiry</button>
-  </div>
-
-</form>
+</body>
+</html>
