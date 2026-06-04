@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real Interest Rate — Risk Decoded</title>
+  <meta name="description" content="A rigorous, accessible guide to real interest rates: Fisher equation, risk management channels, live World Bank data, and an interactive simulator." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet" />
+  
+
+  <style>
+    :root {
+      --ink: #0F172A;
+      --paper: #F8FAFC;
+      --paper-2: #FFFFFF;
+      --paper-3: #EFF6FF;
+      --accent: #2563EB;
+      --accent-2: #1D4ED8;
+      --accent-muted: #60A5FA;
+      --rule: #CBD5E1;
+      --mono: 'IBM Plex Mono', monospace;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --display: 'Playfair Display', Georgia, serif;
+      --col: 720px;
+      --wide: 1100px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.75;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--ink);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 52px;
+      border-bottom: 2px solid var(--accent);
+    }
+    .nav-brand {
+      font-family: var(--mono); font-size: 0.78rem; font-weight: 500;
+      color: var(--paper); letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--rule);
+      text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent-muted); }
+    .nav-home {
+      color: var(--paper) !important;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 0.25rem 0.75rem !important;
+      letter-spacing: 0.06em !important;
+      transition: background 0.2s, border-color 0.2s !important;
+    }
+    .nav-home:hover {
+      background: rgba(255,255,255,0.08) !important;
+      border-color: var(--accent-muted) !important;
+      color: var(--accent-muted) !important;
+    }
+    .nav-toggle {
+      display: none; background: none; border: none;
+      cursor: pointer; flex-direction: column; gap: 5px; padding: 4px;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 1.5px; background: var(--paper); transition: all 0.2s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      margin-top: 52px;
+      background: var(--ink); color: var(--paper);
+      padding: 5rem 2rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 39px,
+        rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px
+      );
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: var(--wide); margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 320px; gap: 4rem; align-items: end;
+    }
+    .hero-label {
+      font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent-muted); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+    .hero h1 {
+      font-family: var(--display); font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 900; line-height: 1.08; letter-spacing: -0.01em;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent-muted); }
+    .hero-sub {
+      margin-top: 1.4rem; font-size: 1rem;
+      color: rgba(248,250,252,0.65); max-width: 520px; font-weight: 300;
+    }
+    .hero-stats {
+      display: flex; flex-direction: column; gap: 1.4rem;
+      border-left: 1px solid rgba(255,255,255,0.12); padding-left: 2rem;
+    }
+    .stat-label {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(248,250,252,0.42); margin-bottom: 0.1rem;
+    }
+    .stat-value {
+      font-family: var(--display); font-size: 1.9rem; font-weight: 700; line-height: 1;
+    }
+    .stat-value.red { color: var(--accent); }
+    .stat-value.blue { color: #7aaee8; }
+    .stat-note { font-size: 0.68rem; color: rgba(248,250,252,0.35); margin-top: 0.15rem; }
+
+    /* ── TOC STRIP ── */
+    .toc-strip { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.07); }
+    .toc-inner {
+      max-width: var(--wide); margin: 0 auto; counter-reset: toc;
+      display: flex; overflow-x: auto; scrollbar-width: none;
+    }
+    .toc-inner::-webkit-scrollbar { display: none; }
+    .toc-link {
+      font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.09em;
+      text-transform: uppercase; color: rgba(245,241,235,0.4);
+      text-decoration: none; padding: 0.85rem 1.1rem;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      white-space: nowrap; transition: color 0.2s, background 0.2s;
+      counter-increment: toc;
+    }
+    .toc-link:first-child { border-left: 1px solid rgba(255,255,255,0.07); }
+    .toc-link::before { content: counter(toc, decimal-leading-zero) ' '; color: var(--accent); margin-right: 0.3rem; }
+    .toc-link:hover { color: var(--paper); background: rgba(255,255,255,0.04); }
+
+    /* ── LAYOUT ── */
+    .page { max-width: var(--wide); margin: 0 auto; padding: 0 2rem; }
+
+    section {
+      padding: 5rem 0; border-bottom: 1px solid var(--rule);
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 3rem; }
+    .section-num {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--accent);
+      letter-spacing: 0.1em; flex-shrink: 0; padding-top: 0.2rem;
+    }
+    .section-title { font-family: var(--display); font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 700; line-height: 1.15; }
+
+    /* ── PROSE ── */
+    .prose { max-width: var(--col); }
+    .prose p { margin-bottom: 1.4rem; }
+    .prose p:last-child { margin-bottom: 0; }
+    .prose strong { font-weight: 600; }
+    .prose em { font-style: italic; }
+    .prose code { font-family: var(--mono); font-size: 0.82em; background: var(--paper-3); padding: 0.1em 0.35em; }
+
+    /* ── FORMULA BOX ── */
+    .formula-box {
+      background: var(--ink); color: var(--paper);
+      border-left: 4px solid var(--accent);
+      padding: 2rem 2.5rem; margin: 2.5rem 0; max-width: var(--col);
+    }
+    .formula-label {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent-muted); margin-bottom: 0.8rem;
+    }
+    .formula-main { font-family: var(--mono); font-size: 1.3rem; font-weight: 500; line-height: 1.6; }
+    .formula-main .var { color: var(--accent-muted); }
+    .formula-main .op { color: var(--accent-muted); }
+    .formula-note { margin-top: 1rem; font-size: 0.82rem; color: rgba(248,250,252,0.55); font-style: italic; }
+
+    /* ── TWO-COL GRID ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2.5rem 0; }
+    .card { background: var(--paper-2); border: 1px solid var(--rule); padding: 1.8rem; }
+    .card-title { font-family: var(--display); font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; }
+    .card-title.accent { color: var(--accent); }
+    .card-title.blue { color: var(--accent-2); }
+    .card p { font-size: 0.88rem; line-height: 1.65; color: #334155; }
+
+    /* ── RISK TABLE ── */
+    .table-wrap { overflow-x: auto; margin: 2.5rem 0; }
+    .risk-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; min-width: 680px; }
+    .risk-table th {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      background: var(--ink); color: var(--paper); padding: 0.8rem 1rem; text-align: left; font-weight: 500;
+    }
+    .risk-table td { padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .risk-table tr:last-child td { border-bottom: none; }
+    .risk-table tr:nth-child(even) td { background: var(--paper-2); }
+    .risk-type { font-weight: 600; font-size: 0.85rem; }
+    .tag {
+      display: inline-block; font-family: var(--mono); font-size: 0.58rem;
+      letter-spacing: 0.07em; padding: 0.12rem 0.45rem;
+      background: var(--accent); color: var(--paper); margin-left: 0.4rem; vertical-align: middle;
+    }
+    .tag.blue { background: var(--accent-2); }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: grid; grid-template-columns: auto 1fr; gap: 1.4rem;
+      background: var(--paper-3); border: 1px solid var(--rule);
+      padding: 1.6rem 1.8rem; margin: 2.5rem 0; max-width: var(--col); align-items: start;
+    }
+    .callout-icon { font-family: var(--mono); font-size: 1.2rem; color: var(--accent); padding-top: 0.05rem; line-height: 1; }
+    .callout-text { font-size: 0.9rem; line-height: 1.7; }
+    .callout-text strong { font-weight: 600; }
+
+    /* ── CHART (kept for Chart.js if re-enabled) ── */
+    .chart-controls { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .ctrl-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); flex-shrink: 0; }
+    .country-btn {
+      font-family: var(--mono); font-size: 0.68rem; padding: 0.32rem 0.75rem;
+      border: 1px solid var(--rule); background: transparent; cursor: pointer;
+      color: var(--ink); letter-spacing: 0.04em; transition: all 0.15s;
+    }
+    .country-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .country-btn.active { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+    .chart-wrap { background: var(--paper-2); border: 1px solid var(--rule); padding: 2rem; position: relative; }
+    .chart-loading {
+      display: flex; align-items: center; justify-content: center; min-height: 300px;
+      font-family: var(--mono); font-size: 0.72rem; color: #94A3B8; letter-spacing: 0.1em;
+    }
+    .chart-caption { font-family: var(--mono); font-size: 0.62rem; color: #94A3B8; letter-spacing: 0.05em; margin-top: 0.9rem; }
+
+    /* ── WB EMBED ── */
+    .wb-embed-wrap {
+      display: grid; grid-template-columns: auto 1fr; gap: 2.5rem; align-items: start;
+    }
+    .wb-embed-inner {
+      border: 1px solid var(--rule); background: var(--paper-2);
+      display: inline-block; flex-shrink: 0;
+    }
+    .wb-embed-inner iframe { display: block; }
+    .wb-note-label {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;
+    }
+    .wb-embed-note p { font-size: 0.88rem; line-height: 1.7; color: #334155; margin-bottom: 0.8rem; }
+    .wb-embed-note p:last-child { margin-bottom: 0; }
+    .wb-embed-note a { color: var(--accent-2); text-underline-offset: 3px; }
+
+    /* ── SIMULATOR ── */
+    .simulator { background: var(--paper-2); border: 1px solid var(--rule); padding: 2.5rem; max-width: 800px; }
+    .sim-title { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.8rem; }
+    .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 2rem; }
+    .sim-field label {
+      font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #64748B; display: block; margin-bottom: 0.6rem;
+    }
+    .sim-field input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; margin-bottom: 0.4rem; }
+    .sim-val { font-family: var(--display); font-size: 1.7rem; font-weight: 700; }
+    .sim-result {
+      background: var(--ink); color: var(--paper);
+      padding: 1.5rem 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; text-align: center;
+    }
+    .sim-result-label {
+      font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(248,250,252,0.45); margin-bottom: 0.3rem;
+    }
+    .sim-result-val { font-family: var(--display); font-size: 1.8rem; font-weight: 700; }
+    .sim-result-val.pos { color: #5cb85c; }
+    .sim-result-val.neg { color: var(--accent); }
+    .sim-result-val.neu { color: var(--accent-muted); }
+    .sim-interpret {
+      background: var(--paper-3); border: 1px solid var(--rule); border-top: none;
+      padding: 1.2rem 1.8rem; font-size: 0.86rem; font-style: italic; line-height: 1.7; color: #334155;
+    }
+
+    /* ── REGIME BLOCKS ── */
+    .regime-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin: 2.5rem 0; border: 1px solid var(--rule); }
+    .regime-block { padding: 2rem 2.2rem; }
+    .regime-block:first-child { border-right: 1px solid var(--rule); }
+    .regime-icon { font-family: var(--display); font-size: 2.6rem; font-weight: 900; line-height: 1; margin-bottom: 0.5rem; }
+    .regime-icon.red { color: var(--accent); }
+    .regime-icon.blue { color: var(--accent-2); }
+    .regime-name { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem; font-weight: 500; }
+    .regime-name.red { color: var(--accent); }
+    .regime-name.blue { color: var(--accent-2); }
+    .regime-block ul { list-style: none; }
+    .regime-block ul li {
+      font-size: 0.86rem; line-height: 1.6; padding: 0.3rem 0 0.3rem 1.2rem;
+      border-bottom: 1px solid var(--rule); color: #334155; position: relative;
+    }
+    .regime-block ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.72rem; top: 0.4rem; }
+    .regime-block.regime-blue ul li::before { color: var(--accent-2); }
+    .regime-block ul li:last-child { border-bottom: none; }
+
+    /* ── TIMELINE ── */
+    .timeline { margin: 2.5rem 0; }
+    .tl-item { display: grid; grid-template-columns: 100px auto 1fr; gap: 0 1.4rem; margin-bottom: 2rem; align-items: start; }
+    .tl-year { font-family: var(--display); font-size: 1.1rem; font-weight: 700; color: var(--accent); text-align: right; padding-top: 0.1rem; }
+    .tl-dot-col { display: flex; flex-direction: column; align-items: center; }
+    .tl-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 0.38rem; }
+    .tl-line { width: 1px; flex-grow: 1; background: var(--rule); margin-top: 4px; min-height: 36px; }
+    .tl-content { padding-bottom: 0.8rem; }
+    .tl-title { font-family: var(--display); font-size: 0.95rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .tl-text { font-size: 0.86rem; color: #475569; line-height: 1.65; }
+
+    /* ── RISK APPS ── */
+    .risk-apps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--rule); margin: 2.5rem 0; }
+    .risk-app-item { background: var(--paper); padding: 1.8rem; }
+    .risk-app-num { font-family: var(--mono); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .risk-app-title { font-family: var(--display); font-size: 0.98rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .risk-app-text { font-size: 0.84rem; line-height: 1.65; color: #334155; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--ink); color: rgba(248,250,252,0.45); padding: 3rem 2rem; }
+    .footer-inner { max-width: var(--wide); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-brand { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .footer-brand span { color: var(--accent); }
+    .footer-meta { font-family: var(--mono); font-size: 0.62rem; }
+    .footer-meta a { color: rgba(248,250,252,0.38); text-underline-offset: 3px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-stats {
+        border-left: none; border-top: 1px solid rgba(255,255,255,0.1);
+        padding-left: 0; padding-top: 1.5rem;
+        flex-direction: row; flex-wrap: wrap; gap: 1.2rem;
+      }
+      .two-col { grid-template-columns: 1fr; }
+      .regime-row { grid-template-columns: 1fr; }
+      .regime-block:first-child { border-right: none; border-bottom: 1px solid var(--rule); }
+      .sim-grid { grid-template-columns: 1fr; }
+      .sim-result { grid-template-columns: 1fr; }
+      .risk-apps { grid-template-columns: 1fr 1fr; }
+      .tl-item { grid-template-columns: 68px auto 1fr; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-links.open {
+        display: flex; flex-direction: column; position: absolute;
+        top: 52px; left: 0; right: 0; background: var(--ink);
+        padding: 1rem 2rem 1.5rem; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.08);
+      }
+      .wb-embed-wrap { grid-template-columns: 1fr; }
+      .wb-embed-inner iframe { width: 100% !important; }
+    }
+    @media (max-width: 520px) {
+      .risk-apps { grid-template-columns: 1fr; }
+      .tl-item { grid-template-columns: 56px auto 1fr; gap: 0 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a class="nav-brand" href="index.html">Risk<span>Decoded</span>.org</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="nav-home">&#8592; Home</a></li>
+    <li><a href="#concept">Concept</a></li>
+    <li><a href="#fisher">Fisher</a></li>
+    <li><a href="#risk">Risk</a></li>
+    <li><a href="#regimes">Regimes</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#tools">Simulator</a></li>
+    <li><a href="#applications">Applications</a></li>
+    <li><a href="#history">History</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-label">Risk Decoded · Fixed Income &amp; Macro</div>
+      <h1>The <em>Real</em><br>Interest Rate</h1>
+      <p class="hero-sub">
+        What borrowing truly costs. What saving truly earns. The single number that
+        underlies modern risk management, asset pricing, and monetary policy.
+      </p>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-label">Core Formula</div>
+        <div class="stat-value" style="font-size:1.1rem;font-family:var(--mono);padding-top:0.2rem;">r &asymp; i &minus; &pi;</div>
+        <div class="stat-note">Nominal rate minus inflation</div>
+      </div>
+      <div>
+        <div class="stat-label">World Bank Indicator</div>
+        <div class="stat-value" style="font-size:0.85rem;font-family:var(--mono);padding-top:0.2rem;">FR.INR.RINR</div>
+        <div class="stat-note">GDP deflator-adjusted lending rate</div>
+      </div>
+      <div>
+        <div class="stat-label">Countries Tracked</div>
+        <div class="stat-value blue">180+</div>
+        <div class="stat-note">Source: World Bank Open Data</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ TOC ═══ -->
+<div class="toc-strip">
+  <div class="toc-inner">
+    <a class="toc-link" href="#concept">What Is It</a>
+    <a class="toc-link" href="#fisher">Fisher Equation</a>
+    <a class="toc-link" href="#risk">Risk Channels</a>
+    <a class="toc-link" href="#regimes">Regimes</a>
+    <a class="toc-link" href="#data">World Bank Data</a>
+    <a class="toc-link" href="#tools">Simulator</a>
+    <a class="toc-link" href="#applications">RM Applications</a>
+    <a class="toc-link" href="#history">History</a>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main class="page">
+
+  <!-- 01 ── CONCEPT -->
+  <section id="concept">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">What Is the Real Interest Rate?</h2>
+    </div>
+    <div class="prose">
+      <p>
+        A nominal interest rate tells you how many dollars you will receive tomorrow for every
+        dollar you lend today. A <strong>real interest rate</strong> tells you how much actual
+        purchasing power you gain — after accounting for the fact that inflation silently erodes
+        the value of every dollar between now and repayment.
+      </p>
+      <p>
+        The distinction is not academic. A saver earning 7% in an economy with 9% inflation is
+        losing ground in real terms. A government borrowing at 12% during a period of 14%
+        inflation is effectively being paid to issue debt. These distortions — invisible at the
+        nominal level — become immediately legible once you look at real rates.
+      </p>
+      <p>
+        For risk managers, the real interest rate is the foundational input: it governs how
+        future cash flows are discounted, how debt burdens evolve, and how every long-duration
+        asset on a balance sheet responds to changes in monetary conditions.
+      </p>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-label">Approximate Formula (Simplified)</div>
+      <div class="formula-main">
+        <span class="var">r</span>
+        <span class="op"> &asymp; </span>
+        <span class="var">i</span>
+        <span class="op"> &minus; </span>
+        <span class="var">&pi;</span>
+      </div>
+      <div class="formula-note">
+        where <strong>r</strong> = real interest rate &nbsp;|&nbsp;
+        <strong>i</strong> = nominal interest rate &nbsp;|&nbsp;
+        <strong>&pi;</strong> = inflation rate (GDP deflator or CPI)
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title accent">Ex-Ante Real Rate</div>
+        <p>
+          Calculated using <em>expected</em> future inflation. This is what drives actual
+          economic decisions — investment choices, loan pricing, wage negotiations. It is
+          forward-looking and embedded in market prices such as TIPS breakevens.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-title blue">Ex-Post Real Rate</div>
+        <p>
+          Calculated using <em>realized</em> inflation after the fact. This is what the
+          World Bank and IMF report. It reveals whether borrowers and lenders actually
+          received the deal they bargained for — and often, they did not.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 ── FISHER EQUATION -->
+  <section id="fisher">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">The Fisher Equation</h2>
+    </div>
+    <div class="prose">
+      <p>
+        Economist Irving Fisher formalized the relationship between nominal rates, real rates,
+        and inflation in the early 20th century. The simplified subtraction formula works well
+        when rates are low, but at higher levels the compounding effect matters — the precise
+        form is:
+      </p>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-label">Fisher Equation (Exact Form)</div>
+      <div class="formula-main">
+        <span class="var">r</span>
+        <span class="op"> = </span>
+        <span class="op">( 1 + </span><span class="var">i</span><span class="op"> )</span>
+        <span class="op"> / </span>
+        <span class="op">( 1 + </span><span class="var">&pi;</span><span class="op"> )</span>
+        <span class="op"> &minus; 1</span>
+      </div>
+      <div class="formula-note">
+        At low rates, r &asymp; i &minus; &pi; is a close approximation. At high rates (e.g.,
+        emerging markets with 20%+ inflation), the exact form becomes materially different
+        and should always be used.
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>
+        The <strong>Fisher Effect</strong> predicts that in the long run, nominal interest
+        rates move one-for-one with expected inflation — so that the real rate remains
+        anchored by the economy's underlying productivity. In practice this holds
+        imperfectly and only over long horizons, making short-run real rate dynamics a
+        primary source of risk.
+      </p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">&#9873;</div>
+      <div class="callout-text">
+        <strong>Risk manager's note:</strong> The divergence between ex-ante and ex-post real
+        rates is itself a risk — <em>inflation surprise risk</em>. When actual inflation
+        exceeds expectations, fixed-income lenders lose in real terms while borrowers gain.
+        Hedging this asymmetry with TIPS or inflation swaps requires an explicit view on
+        the Fisher spread.
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 ── RISK CHANNELS -->
+  <section id="risk">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Risk Management Channels</h2>
+    </div>
+    <div class="prose">
+      <p>
+        The real interest rate is not one risk — it is a transmission mechanism that runs
+        through every major risk category on an institution's balance sheet. The table below
+        maps each channel, its direction of impact, and the standard hedging response.
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="risk-table">
+        <thead>
+          <tr>
+            <th>Risk Category</th>
+            <th>Mechanism</th>
+            <th>Direction</th>
+            <th>Standard Hedge / Tool</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="risk-type">Interest Rate Risk</span><span class="tag">Core</span></td>
+            <td>Rising real rates compress the value of fixed-income assets; duration amplifies sensitivity</td>
+            <td>Higher real rates &rarr; portfolio losses for long positions</td>
+            <td>Duration matching, IR swaps, bond futures</td>
+          </tr>
+          <tr>
+            <td><span class="risk-type">Credit Risk</span><span class="tag">Core</span></td>
+            <td>Higher real rates increase debt service burden, raising probability of default on loans and bonds</td>
+            <td>Higher real rates &rarr; wider credit spreads, higher PD</td>
+            <td>Credit stress scenarios, LTV covenants, CDS</td>
+          </tr>
+          <tr>
+            <td><span class="risk-type">Liquidity Risk</span></td>
+            <td>Rate shock triggers mark-to-market losses on held assets, forcing fire-sale deleveraging</td>
+            <td>Rate spike &rarr; funding stress, margin calls</td>
+            <td>LCR, stress testing, HQLA buffers</td>
+          </tr>
+          <tr>
+            <td><span class="risk-type">Equity Valuation Risk</span></td>
+            <td>Discount rate rises &rarr; present value of future earnings falls &rarr; P/E compression</td>
+            <td>Higher real rates &rarr; lower equity valuations, especially growth stocks</td>
+            <td>Equity duration analysis, sector rotation, put options</td>
+          </tr>
+          <tr>
+            <td><span class="risk-type">Currency / FX Risk</span></td>
+            <td>Real rate differentials drive capital flows; high real rates attract foreign capital, appreciate currency</td>
+            <td>Differential &rarr; exchange rate pressure &amp; carry trade exposure</td>
+            <td>FX forwards, real UIP models</td>
+          </tr>
+          <tr>
+            <td><span class="risk-type">Inflation Risk</span><span class="tag blue">Linked</span></td>
+            <td>Unexpected inflation erodes real rate below expected; real return on fixed instruments declines</td>
+            <td>Inflation surprise &rarr; negative real rate shock for lenders</td>
+            <td>TIPS, inflation swaps, commodity exposure</td>
+          </tr>
+          <tr>
+            <td><span class="risk-type">Sovereign / Systemic Risk</span></td>
+            <td>Persistently high real rates on government debt are unsustainable if growth &lt; real rate (r &gt; g)</td>
+            <td>r &gt; g &rarr; debt-to-GDP diverges &rarr; sovereign stress</td>
+            <td>Country risk premium models, CDS, scenario analysis</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">&#9654;</div>
+      <div class="callout-text">
+        <strong>The r &gt; g condition</strong> (real rate exceeds real GDP growth) is the
+        Piketty–Blanchard framework for sovereign debt sustainability. When this condition
+        persists, the debt-to-GDP ratio grows without bound unless offset by primary surpluses.
+        Risk managers tracking sovereign exposures monitor this spread as a key early-warning
+        indicator.
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 ── REGIMES -->
+  <section id="regimes">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Negative vs. Positive Real Rate Regimes</h2>
+    </div>
+    <div class="prose">
+      <p>
+        The sign of the real interest rate determines the fundamental financial regime an
+        economy operates in. Risk managers must not only model the level of real rates but
+        the <em>transition</em> between regimes — which is typically abrupt and severely
+        disruptive.
+      </p>
+    </div>
+
+    <div class="regime-row">
+      <div class="regime-block">
+        <div class="regime-icon red">&minus;</div>
+        <div class="regime-name red">Negative Real Rate Regime</div>
+        <ul>
+          <li>Borrowers benefit — debt erodes in real terms</li>
+          <li>Savers penalized — cash and bonds lose purchasing power</li>
+          <li>Risk-taking and leverage actively encouraged (moral hazard)</li>
+          <li>Asset bubbles form as investors reach for yield</li>
+          <li>Capital misallocated to unproductive sectors</li>
+          <li>Currency depreciation pressure as real returns fall</li>
+          <li>Common post-crisis: 2010–2021 in developed markets</li>
+        </ul>
+      </div>
+      <div class="regime-block regime-blue">
+        <div class="regime-icon blue">+</div>
+        <div class="regime-name blue">Positive Real Rate Regime</div>
+        <ul>
+          <li>Savers rewarded — real returns on deposits and bonds positive</li>
+          <li>Borrowers face genuine real cost of debt</li>
+          <li>Overleveraged entities face stress and potential default</li>
+          <li>Asset valuations compress across equity, real estate, credit</li>
+          <li>Capital flows to higher real-return economies</li>
+          <li>Productive capital allocation improves over time</li>
+          <li>Current environment (2023–present) in most developed markets</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">!</div>
+      <div class="callout-text">
+        <strong>Transition risk is the most dangerous moment.</strong> Institutions that built
+        balance sheets optimized for a negative real rate environment — holding long-duration
+        assets, running tight liquidity buffers, relying on cheap funding — face simultaneous
+        pressure on all fronts when the regime shifts. The 2022–2023 banking stress (SVB,
+        Credit Suisse) was precisely this transition risk materializing.
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 ── WORLD BANK DATA -->
+  <section id="data">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">World Bank Data: Global Real Rates</h2>
+    </div>
+    <div class="prose">
+      <p>
+        The World Bank tracks real lending rates across 180+ economies using the IMF's
+        lending rate data adjusted by the GDP deflator (indicator:
+        <code>FR.INR.RINR</code>). The widget below is the official World Bank data
+        visualization — explore historical real interest rate trends across countries
+        directly from the source.
+      </p>
+    </div>
+
+    <div class="wb-embed-wrap" style="margin-top:2rem;">
+      <div class="wb-embed-inner">
+        <iframe
+          src="https://data.worldbank.org/share/widget?indicators=FR.INR.RINR"
+          width="450"
+          height="300"
+          frameBorder="0"
+          scrolling="no"
+          title="World Bank — Real Interest Rate (FR.INR.RINR)"
+          style="display:block;"
+        ></iframe>
+      </div>
+      <div class="wb-embed-note">
+        <div class="wb-note-label">About this data</div>
+        <p>
+          Indicator <strong>FR.INR.RINR</strong> — the deposit or lending rate reported
+          by the IMF's International Financial Statistics, adjusted for inflation as
+          measured by the GDP deflator. This is an <em>ex-post</em> measure: it reflects
+          the realized real rate after actual inflation is known, not the expected real
+          rate at the time borrowing occurred.
+        </p>
+        <p>
+          Use the widget controls to switch countries, change the time range, or download
+          the underlying data. For full cross-country comparison and API access, visit
+          <a href="https://data.worldbank.org/indicator/FR.INR.RINR" target="_blank" rel="noopener">
+            data.worldbank.org/indicator/FR.INR.RINR
+          </a>.
+        </p>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:2.5rem;">
+      <div class="card">
+        <div class="card-title accent">Why Emerging Markets Have Higher Real Rates</div>
+        <p>
+          High real rates in developing economies typically reflect not tight monetary
+          conditions alone, but elevated <strong>country risk premiums</strong> —
+          compensation for currency volatility, sovereign default risk, and thin financial
+          markets. A 15% real rate in Turkey or Brazil is structurally distinct from 15%
+          in the United States.
+        </p>
+      </div>
+      <div class="card">
+        <div class="card-title blue">GDP Deflator vs. CPI</div>
+        <p>
+          The World Bank uses the <strong>GDP deflator</strong> rather than CPI to
+          adjust rates. The deflator covers all domestically produced goods, not just
+          a consumer basket. In commodity-exporting economies these can diverge
+          significantly, affecting the comparability of real rate figures across countries.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 ── SIMULATOR -->
+  <section id="tools">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Fisher Equation Simulator</h2>
+    </div>
+    <div class="prose">
+      <p>
+        Adjust the nominal interest rate and inflation rate to see the real rate computed
+        under both the simplified and exact Fisher formulas. Notice how the gap between
+        the two grows at high inflation levels — a critical detail for emerging market
+        analysis and any scenario involving double-digit rates.
+      </p>
+    </div>
+
+    <div class="simulator" style="margin-top:2rem;">
+      <div class="sim-title">&#9654; Real Interest Rate Calculator</div>
+      <div class="sim-grid">
+        <div class="sim-field">
+          <label>Nominal Interest Rate (i)</label>
+          <input type="range" id="sim-i" min="0" max="30" step="0.5" value="8" />
+          <div class="sim-val" id="sim-i-val">8.0%</div>
+        </div>
+        <div class="sim-field">
+          <label>Inflation Rate (&pi;)</label>
+          <input type="range" id="sim-pi" min="-5" max="30" step="0.5" value="3" />
+          <div class="sim-val" id="sim-pi-val">3.0%</div>
+        </div>
+      </div>
+      <div class="sim-result">
+        <div>
+          <div class="sim-result-label">Approx. Real Rate<br>(r &asymp; i &minus; &pi;)</div>
+          <div class="sim-result-val pos" id="sim-approx">+5.00%</div>
+        </div>
+        <div>
+          <div class="sim-result-label">Exact Real Rate<br>(Fisher)</div>
+          <div class="sim-result-val pos" id="sim-exact">+4.85%</div>
+        </div>
+        <div>
+          <div class="sim-result-label">Difference<br>(Exact &minus; Approx)</div>
+          <div class="sim-result-val neu" id="sim-diff">&minus;0.14%</div>
+        </div>
+      </div>
+      <div class="sim-interpret" id="sim-interpret"></div>
+    </div>
+  </section>
+
+  <!-- 07 ── APPLICATIONS -->
+  <section id="applications">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2 class="section-title">Risk Management Applications</h2>
+    </div>
+    <div class="prose">
+      <p>
+        Real interest rates appear explicitly or implicitly in every major risk management
+        framework — from ALM at commercial banks to stress testing at regulators to
+        duration management at pension funds. Below are the six primary practice areas.
+      </p>
+    </div>
+
+    <div class="risk-apps">
+      <div class="risk-app-item">
+        <div class="risk-app-num">01 &mdash; ALM</div>
+        <div class="risk-app-title">Asset-Liability Management</div>
+        <div class="risk-app-text">
+          Banks map how net interest margin (NIM) evolves under different real rate paths.
+          When real rates shift, repricing of assets and liabilities is rarely symmetric —
+          duration gaps create P&amp;L volatility. ALM committees set duration targets
+          and hedging overlays tied explicitly to real rate scenarios.
+        </div>
+      </div>
+      <div class="risk-app-item">
+        <div class="risk-app-num">02 &mdash; Market Risk</div>
+        <div class="risk-app-title">VaR &amp; Stress Testing</div>
+        <div class="risk-app-text">
+          Real rate shifts are a primary factor in interest rate VaR. Basel III's IRRBB
+          framework requires banks to measure P&amp;L impact under six prescribed rate
+          shock scenarios, including parallel shifts of 200bps+ — all grounded in
+          real rate decomposition.
+        </div>
+      </div>
+      <div class="risk-app-item">
+        <div class="risk-app-num">03 &mdash; Credit</div>
+        <div class="risk-app-title">Default Modeling</div>
+        <div class="risk-app-text">
+          Rising real rates squeeze interest coverage ratios (EBIT / Interest Expense).
+          Loan stress tests run scenarios where real rates increase 300–500bps to identify
+          vulnerable borrowers before defaults materialize — a required exercise under
+          IFRS 9 forward-looking provisioning.
+        </div>
+      </div>
+      <div class="risk-app-item">
+        <div class="risk-app-num">04 &mdash; Pensions</div>
+        <div class="risk-app-title">Liability-Driven Investing</div>
+        <div class="risk-app-text">
+          Defined-benefit pension liabilities are discounted at long-term real rates.
+          When real rates fall, liability values surge, creating funding gaps. LDI
+          strategies use long-duration bonds and swaps to immunize against real rate
+          movements across the liability curve.
+        </div>
+      </div>
+      <div class="risk-app-item">
+        <div class="risk-app-num">05 &mdash; Sovereign</div>
+        <div class="risk-app-title">Debt Sustainability Analysis</div>
+        <div class="risk-app-text">
+          The r &minus; g gap (real rate minus real GDP growth) determines whether
+          debt/GDP converges or diverges over time. IMF debt sustainability analyses
+          track this spread as a primary indicator. When r &gt; g persistently,
+          fiscal tightening or restructuring becomes inevitable.
+        </div>
+      </div>
+      <div class="risk-app-item">
+        <div class="risk-app-num">06 &mdash; Derivatives</div>
+        <div class="risk-app-title">Pricing &amp; Hedging</div>
+        <div class="risk-app-text">
+          The real risk-free rate anchors the yield curve used in derivatives valuation.
+          TIPS-derived real rate curves feed directly into inflation swap pricing, real
+          rate swaptions, and cross-currency basis models. Mispricings in real rates
+          propagate across all instruments on the curve.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 ── HISTORY -->
+  <section id="history">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2 class="section-title">Historical Context</h2>
+    </div>
+    <div class="prose">
+      <p>
+        The history of real interest rates is a history of crises — and the policy responses
+        to them. Each major episode left a distinct imprint on how risk managers think about
+        rate exposure.
+      </p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">1970s</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Financial Repression — Deeply Negative Real Rates</div>
+          <div class="tl-text">Oil shocks drove inflation well above nominal rates in most economies. Real rates turned sharply negative. Governments effectively taxed savers to reduce the real burden of post-war debt. Fixed-income investors experienced silent expropriation of purchasing power.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1979–82</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Volcker Shock — Real Rates Spike to 10%+</div>
+          <div class="tl-text">Fed Chair Paul Volcker raised the Fed Funds Rate above 20% to crush inflation. Real rates reached historic highs, triggering the 1981–82 recession, the Latin American debt crisis, and a wave of corporate bankruptcies. The lesson: rapid real rate normalization is systemically destabilizing.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1990–2007</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">The Great Moderation — Stable Positive Real Rates</div>
+          <div class="tl-text">Inflation expectations anchored; real rates moderate and positive (2–4% in the US). Risk models built during this period implicitly assumed mean-reverting, stable real rates — an assumption that proved catastrophically wrong in the following decade.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2008–21</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Zero Lower Bound — Negative or Near-Zero Real Rates</div>
+          <div class="tl-text">Post-GFC, central banks held nominal rates near zero while inflation remained modest. Real rates turned negative or near-zero across developed markets. ECB and BoJ moved into negative nominal territory. Investors were forced into riskier assets to generate any real return, sowing seeds of the 2022 crisis.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2022–23</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Post-COVID Shock — Fastest Real Rate Normalization in 40 Years</div>
+          <div class="tl-text">Supply chain disruptions and fiscal stimulus drove inflation to 40-year highs. Central banks raised rates aggressively. Real rates swung from deeply negative to positive within 18 months — collapsing bond portfolios (Bloomberg Global Agg lost ~20%), triggering SVB's failure, and exposing duration mismatches globally.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">2024+</div>
+        <div class="tl-dot-col"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <div class="tl-title">Recalibration — A Structurally Higher r*?</div>
+          <div class="tl-text">The debate among economists is whether the neutral real rate (r*) has structurally shifted higher due to deglobalization, energy transition capex, and persistent fiscal expansion. If so, the negative-real-rate decade was an aberration — with significant long-term implications for all asset pricing and risk models.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Risk<span>Decoded</span>.org</div>
+    <div class="footer-meta">
+      Data: World Bank Open Data API &middot; FR.INR.RINR &middot;
+      <a href="https://data.worldbank.org/indicator/FR.INR.RINR" target="_blank" rel="noopener">
+        data.worldbank.org
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+// ── Mobile nav toggle ──
+document.getElementById('navToggle').addEventListener('click', function () {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(function (a) {
+  a.addEventListener('click', function () {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+// ── Scroll reveal ──
+var revealObserver = new IntersectionObserver(function (entries) {
+  entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.06 });
+document.querySelectorAll('section').forEach(function (s) { revealObserver.observe(s); });
+
+// ── Fisher Simulator ──
+function fmt(v) {
+  return (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+}
+
+function getClass(v) {
+  if (v > 0.5) return 'pos';
+  if (v < -0.5) return 'neg';
+  return 'neu';
+}
+
+function interpret(exact) {
+  if (exact < -5)
+    return 'Deeply negative real rates — a regime of financial repression. Lenders are effectively subsidizing borrowers in real terms. Savings are being eroded; leverage is implicitly encouraged.';
+  if (exact < 0)
+    return 'Negative real rates. Inflation is running ahead of the lending rate. Borrowers benefit in real terms while fixed-income holders and savers lose purchasing power.';
+  if (exact < 2)
+    return 'Low positive real rates. The real cost of capital is modest. Risk-taking is still encouraged, though savers earn a thin — but positive — real return.';
+  if (exact < 5)
+    return 'Moderate positive real rates — historically the "normal" zone for developed markets. Capital allocation is more disciplined; long-duration assets face measured headwinds.';
+  if (exact < 10)
+    return 'High real rates — typical of emerging markets or aggressive monetary tightening. Debt service burdens are significant; credit stress rises for leveraged borrowers and sovereigns.';
+  return 'Extreme real rates. Associated with severe monetary tightening (Volcker-style) or acute country risk premiums. Borrowing at scale becomes fiscally and commercially unviable for most entities.';
+}
+
+function updateSim() {
+  var i  = parseFloat(document.getElementById('sim-i').value);
+  var pi = parseFloat(document.getElementById('sim-pi').value);
+
+  document.getElementById('sim-i-val').textContent  = i.toFixed(1) + '%';
+  document.getElementById('sim-pi-val').textContent = pi.toFixed(1) + '%';
+
+  var approx = i - pi;
+  var exact  = ((1 + i / 100) / (1 + pi / 100) - 1) * 100;
+  var diff   = exact - approx;
+
+  var aEl = document.getElementById('sim-approx');
+  var eEl = document.getElementById('sim-exact');
+  var dEl = document.getElementById('sim-diff');
+
+  aEl.textContent = fmt(approx); aEl.className = 'sim-result-val ' + getClass(approx);
+  eEl.textContent = fmt(exact);  eEl.className = 'sim-result-val ' + getClass(exact);
+  dEl.textContent = fmt(diff);   dEl.className = 'sim-result-val neu';
+
+  document.getElementById('sim-interpret').textContent = interpret(exact);
+}
+
+document.getElementById('sim-i').addEventListener('input', updateSim);
+document.getElementById('sim-pi').addEventListener('input', updateSim);
+updateSim();
+</script>
+
+</body>
+</html>
